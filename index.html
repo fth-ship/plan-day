@@ -19,7 +19,7 @@
         <form class="time-input col-md-6 col-md-push-3">
           <div class="form-group">
             <label for="from">Periodo</label>
-            <div range-slider min='min' max='max' model-min='model.from' model-max='model.to'></div>
+            <div range-slider min='min' max='max' model-min='model.from' model-max='model.to' filter='time'></div>
           </div>
 
           <div class="form-group">
@@ -43,7 +43,7 @@
             <td>Breve descrição</td>
           </thead>
           <tbody>
-            <tr ng-repeat='item in plan'>
+            <tr ng-repeat='item in plan track by $index'>
               <td>{{item.from}}</td>
               <td>{{item.to}}</td>
               <td>{{item.shortDescription}}</td>
