@@ -50,13 +50,26 @@ function TimeInputCtrlHandler($scope, $log, setLocalPlan, getLocalPlan, $rootSco
   this.saveTime = saveTimeHandler;
 }
 
-function TimeListCtrlHandler($scope, $log, getLocalPlan) {
+function TimeListCtrlHandler($scope, $log, getLocalPlan, setLocalPlan) {
   $scope.plan = plan;
 
   function planEventHandler(e, data) {
     $scope.plan = data; 
   }
   $scope.$on('plan', planEventHandler);
+
+  function removeTimeHandler(i) {
+    $log.debug('remove time handler');
+    function planFilterHandler(item, idx) {
+      if (i !== idx) {
+        return item;
+      }
+    }
+    plan = plan.filter(planFilterHandler);
+    setLocalPlan(plan);
+    $scope.$broadcast('plan', plan);
+  }
+  this.removeTime = removeTimeHandler;
 }
 
 angular

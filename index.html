@@ -43,12 +43,14 @@
             <td>Inicio</td>
             <td>Fim</td>
             <td>Breve descrição</td>
+            <td></td>
           </thead>
           <tbody>
             <tr ng-repeat='item in plan track by $index'>
               <td>{{item.from}}</td>
               <td>{{item.to}}</td>
               <td>{{item.shortDescription}}</td>
+              <td><button type='button' class='btn btn-warning col-md-12' ng-click='vm.removeTime($index)'>Remover</button></td>
             </tr>
           </tbody>
         </table>
