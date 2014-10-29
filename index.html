@@ -24,7 +24,12 @@
 
           <div class="form-group">
             <label for="shortDescription">Breve descrição</label>
-            <input class="form-control" type="text" placeholder='Breve descrição...' ng-model='model.shortDescription'>
+            <input
+              class="form-control"
+              type="text"
+              placeholder='Breve descrição...'
+              ng-model='model.shortDescription'
+              ng-keypress='$event.keyCode === 13 ? vm.saveTime(model) : null'>
           </div>
 
           <div class="form-group">
@@ -36,24 +41,20 @@
       <hr>
 
       <article ng-controller='TimeListCtrl as vm'>
-        <div class="well" ng-hide='plan.length'>Vamos começar a planejar?</div>
+        <header>
+          <div class="well" ng-hide='plan.length'>Vamos começar a planejar?</div>
+        </header>
 
-        <table class="table table-bordered table-striped" ng-show='plan.length'>
-          <thead>
-            <td>Inicio</td>
-            <td>Fim</td>
-            <td>Breve descrição</td>
-            <td></td>
-          </thead>
-          <tbody>
-            <tr ng-repeat='item in plan track by $index'>
-              <td>{{item.from}}</td>
-              <td>{{item.to}}</td>
-              <td>{{item.shortDescription}}</td>
-              <td><button type='button' class='btn btn-warning col-md-12' ng-click='vm.removeTime($index)'>Remover</button></td>
-            </tr>
-          </tbody>
-        </table>
+        <section class='row-fluid'>
+          <article class='col-md-8 col-md-push-2'>
+            <ul class="list-group" ng-show='plan.length'>
+              <li class="list-group-item" ng-repeat='item in plan track by $index'>
+                {{item.from}} até {{item.to}} - <b>{{item.shortDescription}}</b>
+                <a href='#' class='pull-right' ng-click='vm.removeTime($index)'>Remover</a>
+              </li>
+            </ul>
+          </article>
+        </section>
       </article>
     </section>
   </div>
