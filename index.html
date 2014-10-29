@@ -36,7 +36,9 @@
       <hr>
 
       <article ng-controller='TimeListCtrl as vm'>
-        <table class="table table-bordered table-striped">
+        <div class="well" ng-hide='plan.length'>Vamos começar a planejar?</div>
+
+        <table class="table table-bordered table-striped" ng-show='plan.length'>
           <thead>
             <td>Inicio</td>
             <td>Fim</td>

@@ -35,6 +35,8 @@ function TimeInputCtrlHandler($scope, $log, setLocalPlan, getLocalPlan, $rootSco
 
   function saveTimeHandler(model) {
     $log.debug('save time handler');
+    model.from = timeHandler.call({ $log: $log, min: min, max: max }, model.from);
+    model.to = timeHandler.call({ $log: $log, min: min, max: max }, model.to);
     plan.push(model);
     setLocalPlan(plan);
     plan = getLocalPlan();
