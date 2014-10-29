@@ -10,8 +10,19 @@ function getLocalPlanHandler() {
 
 function timeHandler(input) {
   var timeRange = [];
+  var isHalf = false;
 
-  return input;
+  for (var i = this.min, l = this.max; i < l; i += 1) {
+    var current = i + 1;
+    if (current === 24) {
+      current = '00';
+    }
+
+    timeRange.push(current + ':00');
+    timeRange.push(current + ':30');
+  }
+
+  return timeRange[ input ];
 }
 
 function TimeInputCtrlHandler($scope, $log, setLocalPlan, getLocalPlan, $rootScope, min, max) {
@@ -49,7 +60,7 @@ function TimeListCtrlHandler($scope, $log, getLocalPlan) {
 angular
   .module('plan-day', ['ui-rangeSlider'])
   .value('min', 0)
-  .value('max', (24 / .5))
+  .value('max', (24 / .5) - 1)
   .factory('setLocalPlan', function () {
     return setLocalPlanHandler;
   })
