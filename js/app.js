@@ -25,6 +25,10 @@ function timeHandler(input) {
   return timeRange[ input ];
 }
 
+function TimeHeaderCtrlHandler($log, $scope) {
+  $scope.today = moment().format('DD/MM/YYYY');
+}
+
 function TimeInputCtrlHandler($scope, $log, setLocalPlan, getLocalPlan, $rootScope, min, max) {
   $scope.min = min;
   $scope.max = max;
@@ -89,6 +93,7 @@ angular
       max: max
     });
   })
+  .controller('TimeHeaderCtrl', TimeHeaderCtrlHandler)
   .controller('TimeInputCtrl', TimeInputCtrlHandler)
   .controller('TimeListCtrl', TimeListCtrlHandler)
   .run(function ($log) {
