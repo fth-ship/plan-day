@@ -53,21 +53,14 @@ function TimeInputCtrlHandler($scope, $log, setLocalPlan, getLocalPlan, $rootSco
       to: $scope.max,
       shortDescription: ''
     };
-<<<<<<< HEAD
-=======
     $scope.distractionTime = 30000;
->>>>>>> master
   }
   self.saveTime = saveTimeHandler;
 
   function timeoutHandler() {
     self.distractionFree = true;
   }
-<<<<<<< HEAD
-  $interval(timeoutHandler, 30000);
-=======
   $interval(timeoutHandler, $scope.distractionTime);
->>>>>>> master
 }
 
 function TimeListCtrlHandler($scope, $log, getLocalPlan, setLocalPlan) {
