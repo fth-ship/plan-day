@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Plan day</title>
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/bower_components/angular-rangeslider/angular.rangeSlider.css">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+  <div class="content">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller='TimeHeaderCtrl as vm'>
+      <!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Plan Day</a>
+        </div>
+
+        <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-6">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">{{today}}</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+
+    <section class="time-holder container" style='margin-top:70px;'>
+      <article class='row' ng-controller='TimeInputCtrl as vm' ng-init='vm.distractionFree=false'>
+        <form class="time-input col-md-10 col-md-push-1" ng-hide='!vm.distractionFree'>
+          <button class="btn btn-default col-md-12" ng-click='vm.distractionFree=false'>Inserir novo item</button>
+        </form>
+
+        <form class="time-input col-md-10 col-md-push-1" ng-hide='vm.distractionFree'>
+          <div class="form-group">
+            <label for="from">Periodo</label>
+            <div range-slider min='min' max='max' model-min='model.from' model-max='model.to' filter='time'></div>
+          </div>
+
+          <div class="form-group">
+            <label for="shortDescription">Breve descrição</label>
+            <input
+              class="form-control"
+              type="text"
+              placeholder='Breve descrição...'
+              ng-model='model.shortDescription'
+              ng-keypress='$event.keyCode === 13 ? vm.saveTime(model) : null'>
+          </div>
+
+          <div class="form-group">
+            <button class='btn btn-success col-md-12' type='button' ng-click='vm.saveTime(model)'>Salvar</button>
+            <button class='btn btn-warning col-md-12' type='button' ng-click='vm.distractionFree=true' style='margin-top:10px'>Ocultar</button>
+          </div>
+        </form>
+      </article>
+    </section>
+
+    <hr>
+
+    <section class="time-holder container">
+      <article ng-controller='TimeListCtrl as vm'>
+        <header>
+          <div class="well" ng-hide='plan.length'>Vamos começar a planejar?</div>
+        </header>
+
+        <section class='row-fluid'>
+          <article class='col-md-8 col-md-push-2'>
+            <ul class="list-group" ng-show='plan.length'>
+              <li class="list-group-item" ng-repeat='item in plan track by $index'>
+                {{item.from}} até {{item.to}} - <b>{{item.shortDescription}}</b>
+                <a href='#' class='pull-right' ng-click='vm.removeTime($index)'>Remover</a>
+              </li>
+            </ul>
+          </article>
+        </section>
+      </article>
+    </section>
+  </div>
+  <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+  <script src='/bower_components/angular/angular.min.js'></script>
+  <script src='/bower_components/angular-rangeslider/angular.rangeSlider.js'></script>
+  <script src='/bower_components/moment/min/moment.min.js'></script>
+  <script src='/js/app.js'></script>
+</body>
+</html>
