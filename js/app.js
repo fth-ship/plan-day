@@ -29,7 +29,9 @@ function TimeHeaderCtrlHandler($log, $scope) {
   $scope.today = moment().format('DD/MM/YYYY');
 }
 
-function TimeInputCtrlHandler($scope, $log, setLocalPlan, getLocalPlan, $rootScope, min, max) {
+function TimeInputCtrlHandler($scope, $log, setLocalPlan, getLocalPlan, $rootScope, min, max, $interval) {
+  var self = this;
+
   $scope.min = min;
   $scope.max = max;
   $scope.model = { 
@@ -51,7 +53,12 @@ function TimeInputCtrlHandler($scope, $log, setLocalPlan, getLocalPlan, $rootSco
       shortDescription: ''
     };
   }
-  this.saveTime = saveTimeHandler;
+  self.saveTime = saveTimeHandler;
+
+  function timeoutHandler() {
+    self.distractionFree = true;
+  }
+  $interval(timeoutHandler, 30000);
 }
 
 function TimeListCtrlHandler($scope, $log, getLocalPlan, setLocalPlan) {

@@ -25,8 +25,12 @@
     </nav>
 
     <section class="time-holder container" style='margin-top:70px;'>
-      <article class='row' ng-controller='TimeInputCtrl as vm'>
-        <form class="time-input col-md-10 col-md-push-1">
+      <article class='row' ng-controller='TimeInputCtrl as vm' ng-init='vm.distractionFree=false'>
+        <form class="time-input col-md-10 col-md-push-1" ng-hide='!vm.distractionFree'>
+          <button class="btn btn-default col-md-12" ng-click='vm.distractionFree=false'>Inserir novo item</button>
+        </form>
+
+        <form class="time-input col-md-10 col-md-push-1" ng-hide='vm.distractionFree'>
           <div class="form-group">
             <label for="from">Periodo</label>
             <div range-slider min='min' max='max' model-min='model.from' model-max='model.to' filter='time'></div>
@@ -44,6 +48,7 @@
 
           <div class="form-group">
             <button class='btn btn-success col-md-12' type='button' ng-click='vm.saveTime(model)'>Salvar</button>
+            <button class='btn btn-warning col-md-12' type='button' ng-click='vm.distractionFree=true' style='margin-top:10px'>Ocultar</button>
           </div>
         </form>
       </article>
@@ -51,7 +56,7 @@
 
     <hr>
 
-    <section>
+    <section class="time-holder container">
       <article ng-controller='TimeListCtrl as vm'>
         <header>
           <div class="well" ng-hide='plan.length'>Vamos começar a planejar?</div>
