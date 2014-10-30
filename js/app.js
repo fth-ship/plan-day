@@ -38,10 +38,7 @@ function TimeInputCtrlHandler($scope, $log, setLocalPlan, getLocalPlan, $rootSco
     from: $scope.min,
     to: $scope.max,
   };
-<<<<<<< HEAD
-=======
   $scope.distractionTime = 30000;
->>>>>>> master
 
   function saveTimeHandler(model) {
     $log.debug('save time handler');
